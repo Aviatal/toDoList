@@ -7,46 +7,21 @@ use Illuminate\Http\Request;
 
 class TodolistController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        $todolist = todolist::all();
+        return view('home', compact('todolist'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
-    }
+        $data = $request->validate([
+            'task' => 'required'
+        ]);
+        todolist::create($data);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\todolist  $todolist
-     * @return \Illuminate\Http\Response
-     */
-    public function show(todolist $todolist)
-    {
-        //
+        return back();
     }
 
     /**
@@ -80,6 +55,8 @@ class TodolistController extends Controller
      */
     public function destroy(todolist $todolist)
     {
-        //
+        $todolist->delete();
+
+        return back();
     }
 }
