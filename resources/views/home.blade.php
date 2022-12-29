@@ -35,6 +35,15 @@
                                     @method('delete')
                                     <button type="submit" class="btn btn-link btn-sm float-end"><i class="fa fa-trash"></i></button>
                                 </form>
+                                <form action="{{route('update', $item->id)}}" method="POST">
+                                    @csrf
+                                    @method('put')
+                                    @if ($item->is_done == 0)
+                                        <button type="submit" class="btn btn-link btn-sm float-end mt-n4" title="Click to mark as done"><i class="far fa-circle"></i></button>
+                                    @else 
+                                        <button type="submit" class="btn btn-link btn-sm float-end mt-n4"><i class="fas fa-circle" title="Click to mark undone"></i></button>
+                                    @endif
+                                </form>
                             </li>
                         @endforeach
                     </ul>

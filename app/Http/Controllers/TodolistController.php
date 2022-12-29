@@ -16,10 +16,7 @@ class TodolistController extends Controller
 
     public function store(Request $request)
     {
-        // $data = $request->validate([
-        //     'task' => 'required',
-        //     'is_done' => 'required'
-        // ]);
+
         $todolist = new todolist();
 
         $todolist->task = $request->task;
@@ -49,9 +46,23 @@ class TodolistController extends Controller
      * @param  \App\Models\todolist  $todolist
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, todolist $todolist)
+    public function update(Request $request, $id)
     {
-        //
+        $task = todolist::find($id);
+
+        if($task->is_done == '1')
+        {
+            $task->is_done = 0;
+        }
+        else
+        {
+            $task->is_done = 1;
+        }
+
+        $task->update();
+
+        return back();
+
     }
 
     /**
