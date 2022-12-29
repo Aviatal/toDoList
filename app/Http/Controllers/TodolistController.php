@@ -17,8 +17,13 @@ class TodolistController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'task' => 'required'
+            'task' => 'required',
+            'is_done' => 'required'
         ]);
+        // todolist::create([
+        //     'task' => $request->task,
+        //     'is_done' => false
+        // ]);
         todolist::create($data);
 
         return back();
