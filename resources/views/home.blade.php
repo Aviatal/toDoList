@@ -20,17 +20,17 @@
                 @csrf
                     <div class="input-group">
                         <input type="text" name="task" class="form-control" placeholder="Add your new todo">
-                        <input type="radio" name="is_done" value="0" hidden>
+                        <input type="number" name="is_done" value="0" hidden>
                         <button type="submit" class="btn btn-dark btn-sm px-4"><i class="fa fa-plus"></i></button>
                     </div>
                 </form>
                 {{-- if tasks count --}}
                 @if (count($todolist))
                     <ul class="list-group list-group-flush mt-3">
-                        @foreach ($todolist as $todolis)
+                        @foreach ($todolist as $item)
                             <li class="list-group-item">
-                                <form action="{{route('destroy', $todolis->id)}}" method="POST">
-                                    {{todolis->task}}
+                                <form action="{{route('destroy', $item->id)}}" method="POST">
+                                    {{$item->task}}
                                     @csrf
                                     @method('delete')
                                     <button type="submit" class="btn btn-link btn-sm float-end"><i class="fa fa-trash"></i></button>
